@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.example.demo.api.dto.PizzaDTO;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,9 +43,11 @@ public class Pizza {
 	private float price;
 
 	@OneToMany(mappedBy = "pizza")
+	@JsonManagedReference
 	private List<Offer> offers;
 
 	@ManyToMany()
+	@JsonManagedReference
 	@JoinTable(name = "pizza_ingredients", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
 	private List<Ingredient> ingredients;
 
@@ -71,6 +76,13 @@ public class Pizza {
 		this.photo_url = photo_url;
 		this.price = price;
 		setIngredients(Arrays.asList(ingredients));
+	}
+
+	public Pizza(PizzaDTO pizzaDto) {
+		setName(pizzaDto.getName());
+		setDescription(pizzaDto.getDescription());
+		setPhoto_url(pizzaDto.getPhoto_url());
+		setPrice(pizzaDto.getPrice());
 	}
 
 	public int getId() {
@@ -116,6 +128,14 @@ public class Pizza {
 	public void deleteIngredient(Ingredient ingredient) {
 
 		getIngredients().remove(ingredient);
+	}
+
+	public void fillFromPizzaDto(PizzaDTO pizzaDto) {
+
+		setName(pizzaDto.getName());
+		setDescription(pizzaDto.getDescription());
+		setPhoto_url(pizzaDto.getPhoto_url());
+		setPrice(pizzaDto.getPrice());
 	}
 
 	@Override

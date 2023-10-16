@@ -43,7 +43,7 @@ public class PizzaController {
 	@GetMapping("/{id}")
 	public String showSinglePizza(@PathVariable int id, Model model) {
 
-		Pizza pizza = pizzaService.findById(id);
+		Pizza pizza = pizzaService.findById(id).get();
 
 		model.addAttribute("pizza", pizza);
 
@@ -73,7 +73,7 @@ public class PizzaController {
 		List<Ingredient> ingredients = ingredientService.findAll();
 		model.addAttribute("ingredients", ingredients);
 
-		Pizza pizza = pizzaService.findById(id);
+		Pizza pizza = pizzaService.findById(id).get();
 		model.addAttribute("pizza", pizza);
 
 		return "update-pizza";

@@ -29,7 +29,7 @@ public class OfferController {
 	@GetMapping("/create_offer/{id}")
 	public String getCreateOffer(@PathVariable int id, Model model) {
 
-		Pizza pizza = pizzaService.findById(id);
+		Pizza pizza = pizzaService.findById(id).get();
 		Offer offer = new Offer();
 
 		model.addAttribute("pizza", pizza);
@@ -42,7 +42,7 @@ public class OfferController {
 	public String storeOffer(@Valid @ModelAttribute Offer formOffer, BindingResult bindingResult,
 			@PathVariable("pizza_id") int id, Model model) {
 
-		Pizza pizza = pizzaService.findById(id);
+		Pizza pizza = pizzaService.findById(id).get();
 
 		return saveOffer(formOffer, pizza, id);
 	}
