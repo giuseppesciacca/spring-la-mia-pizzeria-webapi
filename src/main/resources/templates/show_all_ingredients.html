@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Show ingredients</title>
+</head>
+
+<body>
+	
+	<div th:replace="frags :: header"></div>
+
+	<main>
+		<a href="/">Go back</a>
+
+		<ol th:if="${ingredients.size > 0}">
+			<li th:each="ingredient : ${ingredients}">
+				<p>[[${ingredient.name}]]</p>
+				<form sec:authorize="hasAuthority('ADMIN')" action="#" th:action="@{/delete_ingredient/{id}(id=${ingredient.id})}" method="post">
+					<button type="submit">Delete this ingredient</button>
+				</form>
+			</li>
+		</ol>
+
+		<p sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/create_ingredient}">Add new ingredient</a></p>
+	</main>
+
+</body>
+
+</html>

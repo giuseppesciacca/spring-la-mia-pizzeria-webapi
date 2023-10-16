@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Create offer</title>
+</head>
+
+<body>
+	<div th:replace="frags :: header"></div>
+
+	<a href="/">Go to homepage</a> <br>
+	<a th:href="@{/{id}(id=${pizza.id})}">Return to this pizza</a> <br>
+
+	<form th:object="${offer}" method="POST">
+		<label for="startDate">Start date</label>
+		<input type="date" name="startDate" th:field="*{startDate}" required>
+		<br />
+
+		<label for="endDate">End date</label>
+		<input type="date" name="endDate" th:field="*{endDate}" required>
+		<br />
+
+		<label for="title">Title</label>
+		<input type="text" name="title" th:field="*{title}" required>
+		<br />
+
+		<input type="submit" value="Create offer">
+	</form>
+
+</body>
+
+</html>

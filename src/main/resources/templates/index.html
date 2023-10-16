@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+</head>
+
+<body>
+
+	<div th:replace="frags :: header"></div>
+
+	<main>
+		<form>
+			<label for="name">Search pizza</label>
+			<input name="name" type="text" th:value="${name}">
+
+			<button type="submit">Search</button>
+		</form>
+
+		<button sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/create}">Create new pizza</a></button>
+		<button><a th:href="@{/show_all_ingredients}">Show all ingredients</a></button>
+
+		<hr>
+
+		<p th:if="${pizze.size() < 1}">Non ci sono pizze</p>
+
+		<ul th:if="${pizze.size() > 0}">
+			<li th:each="pizza : ${pizze}">
+				<img width="200px" alt="logo" th:src="@{${pizza.photo_url}}" />
+				<p>Name: [[${pizza.name}]]</p>
+				<p>Description: [[${pizza.description}]].</p>
+				<p>Price: [[${pizza.price}]] euro</p>
+				<p><a th:href="@{/{id}(id= ${pizza.id})}">Go to this pizza</a></p>
+				<p><a th:href="@{update/{id}(id= ${pizza.id})}" sec:authorize="hasAuthority('ADMIN')">Edit this pizza</a></p>
+				<form action="#" th:action="@{/delete/{id}(id= ${pizza.id})}" method="post" sec:authorize="hasAuthority('ADMIN')">
+					<button type="submit">Delete this pizza</button>
+				</form>
+				<hr>
+			</li>
+		</ul>
+
+	</main>
+
+</body>
+
+</html>

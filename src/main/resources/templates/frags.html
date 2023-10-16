@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+
+	<header th:fragment="header">
+		<h1>PIZZERIA</h1>
+		<button sec:authorize="isAuthenticated()"><a href="/logout">LOGOUT</a></button>
+		<button sec:authorize="!isAuthenticated()"><a href="/login">LOGIN</a></button>
+	</header>
+
+</body>
+
+</html>
