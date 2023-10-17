@@ -102,7 +102,7 @@ export default {
           <button
             @click="deletePizza(pizza.id)"
             type="button"
-            class="btn btn-primary mb-3"
+            class="btn btn-danger mb-3"
           >
             Delete this pizza
           </button>
@@ -115,33 +115,59 @@ export default {
         <form @submit.prevent="storePizza">
           <h2 class="text-center">Create pizza</h2>
 
-          <label for="name">Name</label>
-          <br />
-          <input type="text" name="name" v-model="this.newPizza.name" />
-          <br />
-          <label for="description">Description</label>
-          <br />
-          <input
-            type="text"
-            name="description"
-            v-model="this.newPizza.description"
-          />
-          <br />
-          <label for="photo">Photo</label>
-          <br />
-          <input
-            type="text"
-            name="photo_url"
-            v-model="this.newPizza.photo_url"
-          />
-          <br />
-          <label for="price">Price</label>
-          <br />
-          <input type="number" name="price" v-model="this.newPizza.price" />
-          <br />
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              aria-describedby="helpId"
+              placeholder=""
+              v-model="this.newPizza.name"
+            />
+          </div>
 
-          <button type="submit">Create</button>
-          <button @click.prevent="clearForm">Clear form</button>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              aria-describedby="helpId"
+              placeholder=""
+              v-model="this.newPizza.description"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="photo_url" class="form-label">Photo</label>
+            <input
+              type="text"
+              class="form-control"
+              name="photo_url"
+              aria-describedby="helpId"
+              placeholder=""
+              v-model="this.newPizza.photo_url"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              name="price"
+              aria-describedby="helpId"
+              placeholder=""
+              v-model="this.newPizza.price"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary me-3">Create</button>
+
+          <button @click.prevent="clearForm" class="btn btn-warning">
+            Clear form
+          </button>
         </form>
       </div>
     </section>
