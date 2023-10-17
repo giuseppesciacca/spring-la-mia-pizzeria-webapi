@@ -57,14 +57,11 @@ public class PizzaDTO {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	
+
 	@Override
 	public String toString() {
-		
-		return  "id: " + getId()
-				+ "\nname: " + getName() 
-				+ "\nphoto-url: " + getPhoto_url()
-				+ "\nrprice: " + getPrice() 
+
+		return "id: " + getId() + "\nname: " + getName() + "\nphoto-url: " + getPhoto_url() + "\nrprice: " + getPrice()
 				+ "\ndescription: " + getDescription();
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.api.dto.PizzaDTO;
@@ -29,8 +30,14 @@ public class PizzaRestController {
 	private PizzaService pizzaService;
 
 	@GetMapping
-	public ResponseEntity<List<Pizza>> getAll() {
-		List<Pizza> pizze = pizzaService.findAll();
+	public ResponseEntity<List<Pizza>> getAll(@RequestParam(required = false, name = "q") String query) {
+
+		List<Pizza> pizze = null;
+
+		if (query == null)
+			pizze = pizzaService.findAll();
+		else
+			pizze = pizzaService.findByNameContaining(query);
 
 		return new ResponseEntity<List<Pizza>>(pizze, HttpStatus.OK);
 	}

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +30,7 @@ public class Offer {
 	private String title;
 
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name = "pizza_id", nullable = false)
 	private Pizza pizza;
 
